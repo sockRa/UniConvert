@@ -1,0 +1,58 @@
+{
+    "name": "uniconvert",
+    "version": "1.0.0",
+    "description": "Universal file conversion API - Swiss Army Knife for video, audio, image, and document conversion",
+    "main": "dist/server.js",
+    "scripts": {
+        "dev": "tsx watch src/server.ts",
+        "build": "tsc",
+        "start": "node dist/server.js",
+        "test": "jest --testPathPattern=tests/unit",
+        "test:integration": "jest --testPathPattern=tests/integration --runInBand",
+        "test:docker-size": "tsx tests/scripts/checkDockerSize.ts",
+        "wait-for-healthy": "tsx tests/scripts/waitForHealthy.ts",
+        "lint": "eslint src/**/*.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "keywords": [
+        "converter",
+        "ffmpeg",
+        "pandoc",
+        "libreoffice",
+        "sharp",
+        "video",
+        "audio",
+        "image",
+        "document",
+        "api"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.6.7",
+        "bullmq": "^5.1.0",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "fluent-ffmpeg": "^2.1.2",
+        "multer": "^1.4.5-lts.1",
+        "sharp": "^0.33.2",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21",
+        "@types/fluent-ffmpeg": "^2.1.24",
+        "@types/jest": "^29.5.12",
+        "@types/multer": "^1.4.11",
+        "@types/node": "^20.11.16",
+        "@types/uuid": "^9.0.8",
+        "eslint": "^8.56.0",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.2",
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.3"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    }
+}

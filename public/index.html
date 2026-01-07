@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UniConvert - Universal file converter for video, audio, images, and documents">
+  <title>UniConvert - Universal File Converter</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <h1>UniConvert</h1>
+      </div>
+      <p class="tagline">Universal File Converter</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Upload Section -->
+      <section class="upload-section">
+        <div id="dropzone" class="dropzone">
+          <div class="dropzone-content">
+            <div class="dropzone-icon">📁</div>
+            <h2>Drag & Drop your files here</h2>
+            <p>or click to browse</p>
+            <input type="file" id="fileInput" multiple hidden>
+            <div class="supported-formats">
+              <span>Video</span>
+              <span>Audio</span>
+              <span>Images</span>
+              <span>Documents</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversion Options (shown after file selection) -->
+      <section id="optionsSection" class="options-section hidden">
+        <div class="options-card glass">
+          <div class="file-info">
+            <span class="file-icon" id="fileIcon">📄</span>
+            <div class="file-details">
+              <span class="file-name" id="fileName">filename.ext</span>
+              <span class="file-size" id="fileSize">0 MB</span>
+            </div>
+            <button class="btn-clear" id="clearFile">✕</button>
+          </div>
+
+          <div class="options-grid">
+            <div class="option-group">
+              <label for="targetFormat">Convert to</label>
+              <select id="targetFormat" class="select">
+                <option value="">Select format...</option>
+              </select>
+            </div>
+
+            <div class="option-group" id="qualityGroup">
+              <label for="quality">Quality</label>
+              <select id="quality" class="select">
+                <option value="medium">Medium (Balanced)</option>
+                <option value="low">Low (Smaller file)</option>
+                <option value="high">High (Best quality)</option>
+                <option value="lossless">Lossless</option>
+              </select>
+            </div>
+
+            <div class="option-group" id="codecGroup">
+              <label for="codec">Codec</label>
+              <select id="codec" class="select">
+                <option value="h264">H.264 (Compatible)</option>
+                <option value="h265">H.265/HEVC (Efficient)</option>
+                <option value="vp9">VP9 (Web)</option>
+                <option value="av1">AV1 (Modern)</option>
+              </select>
+            </div>
+
+            <div class="option-group" id="resolutionGroup">
+              <label for="resolution">Resolution</label>
+              <select id="resolution" class="select">
+                <option value="original">Original</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="4k">4K</option>
+              </select>
+            </div>
+
+            <div class="option-group" id="bitrateGroup">
+              <label for="bitrate">Bitrate</label>
+              <select id="bitrate" class="select">
+                <option value="192k">192 kbps (Standard)</option>
+                <option value="128k">128 kbps (Smaller)</option>
+                <option value="256k">256 kbps (Better)</option>
+                <option value="320k">320 kbps (Best)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="convertBtn" class="btn-convert">
+            <span class="btn-text">Convert Now</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Active Jobs Section -->
+      <section id="jobsSection" class="jobs-section hidden">
+        <h3>Active Conversions</h3>
+        <div id="jobsList" class="jobs-list"></div>
+      </section>
+
+      <!-- Completed Jobs Section -->
+      <section id="completedSection" class="completed-section hidden">
+        <h3>Completed</h3>
+        <div id="completedList" class="completed-list"></div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Powered by FFmpeg • Pandoc • LibreOffice • Sharp</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
