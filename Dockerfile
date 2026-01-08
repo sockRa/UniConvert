@@ -20,7 +20,7 @@ RUN npm run build
 # Production stage with all conversion tools
 FROM debian:bookworm-slim AS runtime
 
-# Install runtime dependencies
+# Install runtime dependencies with aggressive size optimization
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # Node.js runtime
     nodejs \
@@ -29,20 +29,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     # Pandoc for documents
     pandoc \
-    # LibreOffice for office documents (minimal)
-    libreoffice-writer \
-    libreoffice-calc \
-    libreoffice-impress \
-    # ImageMagick as fallback
-    imagemagick \
+    # LibreOffice headless/nogui variants (much smaller than full packages)
+    libreoffice-writer-nogui \
+    libreoffice-calc-nogui \
+    libreoffice-impress-nogui \
     # Fonts for document rendering
     fonts-liberation \
     fonts-dejavu-core \
     # Utilities
     curl \
     ca-certificates \
+    # Cleanup in same layer to reduce image size
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    && apt-get clean \
+    # Remove unnecessary files
+    && rm -rf /usr/share/doc/* \
+    && rm -rf /usr/share/man/* \
+    && rm -rf /usr/share/locale/* \
+    && rm -rf /var/cache/* \
+    && rm -rf /tmp/*
 
 # Create app user for security
 RUN useradd -m -s /bin/bash appuser
