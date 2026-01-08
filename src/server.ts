@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
+import path from 'node:path';
 import { CONFIG } from './config.js';
 import { convertRouter } from './routes/convert.js';
 import { jobsRouter } from './routes/jobs.js';

@@ -85,8 +85,8 @@ jobsRouter.delete('/:id', async (req, res) => {
 // List all jobs (with pagination)
 jobsRouter.get('/', async (req, res) => {
     try {
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = Math.min(parseInt(req.query.limit as string) || 20, 100);
+        const page = Number.parseInt(req.query.page as string) || 1;
+        const limit = Math.min(Number.parseInt(req.query.limit as string) || 20, 100);
         const status = req.query.status as string;
 
         const start = (page - 1) * limit;

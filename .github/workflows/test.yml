@@ -53,6 +53,9 @@ jobs:
       - name: Wait for healthy
         run: npm run wait-for-healthy
       
+      - name: Generate test fixtures
+        run: docker exec uniconvert-uniconvert-1 npm run test:generate-fixtures || npm run test:generate-fixtures
+      
       - name: Run integration tests
         run: npm run test:integration
       

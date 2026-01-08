@@ -8,3 +8,15 @@ outputs/
 .env.local
 .DS_Store
 .project-context.md
+
+# Generated test fixtures (created by npm run test:generate-fixtures)
+tests/fixtures/*.png
+tests/fixtures/*.jpg
+tests/fixtures/*.webp
+tests/fixtures/*.gif
+tests/fixtures/*.tiff
+tests/fixtures/*.mp3
+tests/fixtures/*.wav
+tests/fixtures/*.mp4
+tests/fixtures/*.mkv
+tests/fixtures/*.docx

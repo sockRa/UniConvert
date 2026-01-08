@@ -9,6 +9,8 @@
         "start": "node dist/server.js",
         "test": "jest --testPathPattern=tests/unit",
         "test:integration": "jest --testPathPattern=tests/integration --runInBand",
+        "test:matrix": "jest --testPathPattern=tests/integration/conversionMatrix --runInBand",
+        "test:generate-fixtures": "tsx tests/scripts/generateFixtures.ts",
         "test:docker-size": "tsx tests/scripts/checkDockerSize.ts",
         "wait-for-healthy": "tsx tests/scripts/waitForHealthy.ts",
         "lint": "eslint src/**/*.ts",

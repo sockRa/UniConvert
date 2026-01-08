@@ -1,19 +1,19 @@
-import path from 'path';
+import path from 'node:path';
 
-const VIDEO_EXTENSIONS = ['.mp4', '.mkv', '.avi', '.mov', '.webm', '.wmv', '.flv', '.m4v', '.3gp'];
-const AUDIO_EXTENSIONS = ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma', '.opus'];
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff', '.tif', '.avif', '.svg', '.ico'];
-const DOCUMENT_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.txt', '.md', '.markdown', '.html', '.htm', '.epub', '.rtf', '.rst'];
+const VIDEO_EXTENSIONS = new Set(['.mp4', '.mkv', '.avi', '.mov', '.webm', '.wmv', '.flv', '.m4v', '.3gp']);
+const AUDIO_EXTENSIONS = new Set(['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma', '.opus']);
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff', '.tif', '.avif', '.svg', '.ico']);
+const DOCUMENT_EXTENSIONS = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.txt', '.md', '.markdown', '.html', '.htm', '.epub', '.rtf', '.rst']);
 
 export type FileType = 'video' | 'audio' | 'image' | 'document' | 'unknown';
 
 export function detectFileType(filename: string): FileType {
     const ext = path.extname(filename).toLowerCase();
 
-    if (VIDEO_EXTENSIONS.includes(ext)) return 'video';
-    if (AUDIO_EXTENSIONS.includes(ext)) return 'audio';
-    if (IMAGE_EXTENSIONS.includes(ext)) return 'image';
-    if (DOCUMENT_EXTENSIONS.includes(ext)) return 'document';
+    if (VIDEO_EXTENSIONS.has(ext)) return 'video';
+    if (AUDIO_EXTENSIONS.has(ext)) return 'audio';
+    if (IMAGE_EXTENSIONS.has(ext)) return 'image';
+    if (DOCUMENT_EXTENSIONS.has(ext)) return 'document';
 
     return 'unknown';
 }

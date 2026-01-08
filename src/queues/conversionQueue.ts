@@ -10,7 +10,7 @@ function getRedisConfig() {
     const url = new URL(CONFIG.redis.url);
     return {
         host: url.hostname || 'localhost',
-        port: parseInt(url.port || '6379', 10),
+        port: Number.parseInt(url.port || '6379', 10),
         maxRetriesPerRequest: null,
     };
 }

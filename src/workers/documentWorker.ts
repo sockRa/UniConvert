@@ -1,8 +1,8 @@
 import { Worker, Job } from 'bullmq';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
-import fs from 'fs/promises';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import { CONFIG } from '../config.js';
 import { getRedisOptions } from '../queues/conversionQueue.js';
 import { sendWebhook } from '../services/webhookService.js';
@@ -18,10 +18,10 @@ interface DocumentJobData {
 }
 
 // Formats handled by Pandoc
-const PANDOC_FORMATS = ['html', 'markdown', 'md', 'txt', 'epub', 'rst', 'docx', 'odt', 'rtf'];
+const PANDOC_FORMATS = new Set(['html', 'markdown', 'md', 'txt', 'epub', 'rst', 'docx', 'odt', 'rtf']);
 
 // Input formats that need LibreOffice for PDF conversion
-const OFFICE_INPUT_EXTENSIONS = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp'];
+const OFFICE_INPUT_EXTENSIONS = new Set(['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp']);
 
 async function processDocumentJob(job: Job<DocumentJobData>) {
     const { jobId, inputPath, originalName, targetFormat, webhookUrl } = job.data;
@@ -35,8 +35,8 @@ async function processDocumentJob(job: Job<DocumentJobData>) {
         await job.updateProgress(10);
 
         // Determine which tool to use
-        const isOfficeToPdf = targetFormat === 'pdf' && OFFICE_INPUT_EXTENSIONS.includes(inputExt);
-        const usePandoc = PANDOC_FORMATS.includes(targetFormat) && !isOfficeToPdf;
+        const isOfficeToPdf = targetFormat === 'pdf' && OFFICE_INPUT_EXTENSIONS.has(inputExt);
+        const usePandoc = PANDOC_FORMATS.has(targetFormat) && !isOfficeToPdf;
 
         if (isOfficeToPdf) {
             // Use LibreOffice for Office → PDF conversion

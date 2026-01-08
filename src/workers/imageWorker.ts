@@ -1,7 +1,7 @@
 import { Worker, Job } from 'bullmq';
 import sharp from 'sharp';
-import path from 'path';
-import fs from 'fs/promises';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import { CONFIG } from '../config.js';
 import { getRedisOptions } from '../queues/conversionQueue.js';
 import { sendWebhook } from '../services/webhookService.js';

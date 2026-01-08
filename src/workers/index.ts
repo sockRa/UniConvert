@@ -1,7 +1,7 @@
-import { videoWorker } from './videoWorker.js';
-import { audioWorker } from './audioWorker.js';
-import { imageWorker } from './imageWorker.js';
-import { documentWorker } from './documentWorker.js';
+export { videoWorker } from './videoWorker.js';
+export { audioWorker } from './audioWorker.js';
+export { imageWorker } from './imageWorker.js';
+export { documentWorker } from './documentWorker.js';
 
 export async function startWorkers() {
     // Workers are started by importing them

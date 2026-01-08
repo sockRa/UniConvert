@@ -1,5 +1,5 @@
 export const CONFIG = {
-    port: parseInt(process.env.PORT || '3000', 10),
+    port: Number.parseInt(process.env.PORT || '3000', 10),
     nodeEnv: process.env.NODE_ENV || 'development',
 
     // Redis configuration
@@ -13,12 +13,12 @@ export const CONFIG = {
     outputsDir: process.env.OUTPUTS_DIR || './outputs',
 
     // Cleanup settings
-    cleanupIntervalHours: parseInt(process.env.CLEANUP_INTERVAL_HOURS || '24', 10),
-    fileRetentionHours: parseInt(process.env.FILE_RETENTION_HOURS || '168', 10), // 7 days
+    cleanupIntervalHours: Number.parseInt(process.env.CLEANUP_INTERVAL_HOURS || '24', 10),
+    fileRetentionHours: Number.parseInt(process.env.FILE_RETENTION_HOURS || '168', 10), // 7 days
 
     // Job settings
-    jobTimeout: parseInt(process.env.JOB_TIMEOUT_MS || '3600000', 10), // 1 hour default
-    maxConcurrentJobs: parseInt(process.env.MAX_CONCURRENT_JOBS || '3', 10),
+    jobTimeout: Number.parseInt(process.env.JOB_TIMEOUT_MS || '3600000', 10), // 1 hour default
+    maxConcurrentJobs: Number.parseInt(process.env.MAX_CONCURRENT_JOBS || '3', 10),
 } as const;
 
 function parseSize(size: string): number {
@@ -29,10 +29,10 @@ function parseSize(size: string): number {
         'GB': 1024 * 1024 * 1024,
     };
 
-    const match = size.match(/^(\d+)(B|KB|MB|GB)$/i);
+    const match = /^(\d+)(B|KB|MB|GB)$/i.exec(size);
     if (!match) return 500 * 1024 * 1024; // Default 500MB
 
-    const value = parseInt(match[1], 10);
+    const value = Number.parseInt(match[1], 10);
     const unit = match[2].toUpperCase();
     return value * (units[unit] || 1);
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
-import path from 'path';
+import path from 'node:path';
 import { v4 as uuidv4 } from 'uuid';
 import { CONFIG } from '../config.js';
 import {
@@ -119,7 +119,7 @@ convertRouter.post('/image', upload.single('file'), async (req, res) => {
             inputPath: req.file.path,
             originalName: req.file.originalname,
             targetFormat: target_format,
-            quality: quality ? parseInt(quality, 10) : 85,
+            quality: quality ? Number.parseInt(quality, 10) : 85,
             resize: resize ? JSON.parse(resize) : undefined,
             webhookUrl: webhook_url,
         });
