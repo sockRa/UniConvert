@@ -47,10 +47,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /usr/share/man/* \
     && rm -rf /usr/share/locale/* \
     && rm -rf /var/cache/* \
-    && rm -rf /tmp/*
-
-# Create app user for security
-RUN useradd -m -s /bin/bash appuser
+    && rm -rf /tmp/* \
+    # Create app user for security
+    && useradd -m -s /bin/bash appuser
 
 WORKDIR /app
 
@@ -60,7 +59,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package*.json ./
 
-# Create directories for uploads and outputs
+# Create directories for uploads and outputs and set ownership
 RUN mkdir -p /app/uploads /app/outputs && \
     chown -R appuser:appuser /app
 
